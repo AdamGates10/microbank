@@ -3,7 +3,9 @@
 import axios from "axios";
 
 let BaseApi = axios.create({
-	baseURL: "http://localhost:8000/api",
+	baseURL: "https://dtsl-backend.herokuapp.com/api",
+	//baseURL: "http://localhost:8000/api",
+
 });
 
 let Api = () => {
