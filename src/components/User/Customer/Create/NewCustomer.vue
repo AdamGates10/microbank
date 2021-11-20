@@ -197,7 +197,7 @@
               msgBody.value = "New Customer Is Created Successfully";
               msgIcon.value = "mdi-check-circle";
               color.value = "success";
-              overlay.value = false;
+              
               actionResponse.value = true;
               reset.value++;
               curr.value = 0;
@@ -209,7 +209,7 @@
               msgIcon.value = "mdi-close-circle";
               color.value = "error";
               actionResponse.value = true;
-            });
+            }).finally(()=> overlay.value = false);
         }
       };
 
