@@ -118,7 +118,7 @@
               </UserDetails>
             </v-tab-item>
             <v-tab-item>
-              <UserAccount> </UserAccount>
+              <UserAccount />
             </v-tab-item>
           </v-tabs-items>
         </v-tabs>
