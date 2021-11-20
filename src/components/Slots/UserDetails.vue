@@ -3,10 +3,6 @@
     <v-simple-table>
       <tbody>
         <tr>
-          <td>Agent Name</td>
-          <td><slot name="agent_name"> </slot></td>
-        </tr>
-        <tr>
           <td>Name</td>
           <td><slot name="name"> </slot></td>
         </tr>
