@@ -343,7 +343,7 @@
           account_number: customer.value[0].account_number,
           account_id: customer.value[0].account_id,
           customer_id: customer.value[0].user.id,
-          [radioGroup.value]: amount.value,
+          amount: amount.value,
           balance: currentBalance.value,
           type: radioGroup.value + "ed",
         };
