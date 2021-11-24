@@ -22,7 +22,20 @@
           <v-row align="center">
             <v-col cols="12" lg="5">
               <v-avatar size="250" tile>
-                <img :src="customer.avatar_url" alt="" />
+                <v-img :lazy-src="image" :src="image" alt="">
+                  <template v-slot:placeholder>
+                    <v-row
+                      class="fill-height ma-0"
+                      align="center"
+                      justify="center"
+                    >
+                      <v-progress-circular
+                        indeterminate
+                        color="grey lighten-5"
+                      ></v-progress-circular>
+                    </v-row>
+                  </template>
+                </v-img>
               </v-avatar>
             </v-col>
             <v-col cols="12" lg="7">
@@ -136,12 +149,14 @@
   import {
     defineComponent,
     inject,
+    onMounted,
     reactive,
     toRefs,
   } from "@vue/composition-api";
   import { useActions, useGetters } from "vuex-composition-helpers";
   import UserDetails from "@/components/Slots/UserDetails";
   import UserAccount from "@/components/Slots/UserAccount";
+  import Api from "@/apis/Api";
   export default defineComponent({
     components: { UserDetails, UserAccount },
     setup(props, context) {
@@ -156,10 +171,22 @@
         tab: null,
         tabItems: ["Customer Details", "Account Details"],
         response: false,
+        image: null,
       });
 
-      const { overlay, breadcrumbs, response } = toRefs(data);
+      const { overlay, breadcrumbs, response, image } = toRefs(data);
 
+      onMounted(() => {
+        Api()
+          .get("/fetch_image/" + customerId.value, { responseType: "blob" })
+          .then((res) => {
+            let reader = new FileReader();
+            reader.readAsDataURL(res.data);
+            reader.onload = () => {
+              image.value = reader.result;
+            };
+          });
+      });
       getCustomer(customerId.value)
         .then(() => {
           breadcrumbs.value = [
