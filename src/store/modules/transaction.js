@@ -18,7 +18,7 @@ export default {
   },
   actions: {
     async monthlyTransaction({ commit }, date) {
-      await Api()
+      await Api
         .post("/getmonthlytransaction", { date })
         .then((res) => {
           commit('MONTHLY_TRANSACTION', res.data.data)
@@ -26,7 +26,7 @@ export default {
     },
 
     async saveTransaction({ commit }, data) {
-      await Api()
+      await Api
         .post("/savetransaction", { data })
         .then((res) => {
           commit('SAVE_TRANSACTION', res.data.data)

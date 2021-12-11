@@ -27,7 +27,7 @@ export default {
   },
   actions: {
     async customerList({ commit }, page) {
-      await Api()
+      await Api
         .post("/customerlist?page=" + page,)
         .then((res) => {
           commit('CUSTOMER_LIST', res.data.data)
@@ -36,7 +36,7 @@ export default {
     },
 
     async getCustomer({ commit }, customer_id) {
-      await Api()
+      await Api
         .post("/getcustomer", { customer_id })
         .then((res) => {
           commit('SINGLE_CUSTOMER', res.data.data)
@@ -44,7 +44,7 @@ export default {
     },
 
     async getCustomerTransaction({ commit }, { page, acc_number }) {
-      await Api()
+      await Api
         .post("/customertransaction?page=" + page, { acc_number })
         .then((res) => {
           commit('CUSTOMER_TRANSACTION_PG', res.data.data)

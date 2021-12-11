@@ -1,6 +1,7 @@
 /** @format */
 
 import Api from "@/apis/Api";
+import Csrf from "@/apis/Csrf";
 
 export default {
 	state: {
@@ -17,7 +18,7 @@ export default {
 		password: (state) => state.user,
 		getters_users: (state) => state.userList,
 		getters_users_meta: (state) => state.userMeta,
-	
+
 	},
 	mutations: {
 		SET_AUTHENTICATED: (state, value) => (state.authenticated = value),
@@ -27,23 +28,23 @@ export default {
 	},
 	actions: {
 		async signIn({ dispatch }, credentials) {
-			await Api()
+			await Csrf.getCookie();
+			await Api
 				.post("/login", credentials)
-				.then((response) => {
-					localStorage.setItem("token", response.data);
-				});
+				.then(() => localStorage.setItem('auth', 'true'))
 			return dispatch("me");
 		},
 
 		async signOut({ dispatch }) {
-			await Api()
+			await Csrf.getCookie()
+			await Api
 				.post("/logout")
-				.then(() => localStorage.removeItem("token"));
+				.then(() => localStorage.removeItem("auth"));
 			return dispatch("me");
 		},
 
 		me({ commit }) {
-			return Api()
+			return Api
 				.get("/user")
 				.then((response) => {
 					commit("SET_AUTHENTICATED", true);
@@ -56,7 +57,7 @@ export default {
 		},
 
 		async userList({ commit },) {
-			await Api()
+			await Api
 				.post("/userlist",)
 				.then((res) => {
 					commit('USER_LIST', res.data.data)

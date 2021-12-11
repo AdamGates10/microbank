@@ -20,7 +20,7 @@ export default {
   actions: {
 
     async accountList({ commit },) {
-      await Api()
+      await Api
         .post("/accountlist",)
         .then((res) => {
           commit('ACCOUNT_LIST', res.data.data)
@@ -28,13 +28,13 @@ export default {
     },
 
     async addAccount({ commit }, account) {
-      await Api()
+      await Api
         .post('/addaccount', { account })
         .then((res) => commit('ADD_ACCOUNT', res.data.data))
     },
 
     async countAccount({commit}){
-      await Api()
+      await Api
       .post('/countaccount')
       .then((res)=> commit('COUNT_ACCOUNT', res.data.data))
     }
