@@ -25,7 +25,7 @@ export default {
   actions: {
 
     async staffList({ commit },) {
-      await Api
+      await Api()
         .post("/stafflist",)
         .then((res) => {
           commit('STAFF_LIST', res.data.data)
@@ -34,19 +34,19 @@ export default {
     },
 
     async addStaff({ commit }, staff) {
-      await Api
+      await Api()
         .post('/addstaff', { staff })
         .then((res) => commit('ADD_STAFF', res.data.data))
     },
 
     async searchStaff({ commit }, staff) {
-      await Api
+      await Api()
         .post('/searchstaff', { staff })
         .then((res) => commit('SEARCH_STAFF', res.data.data))
     },
 
     async countMembers({ commit }) {
-      await Api
+      await Api()
         .post('/countmembers')
         .then((res) => commit('COUNT_MEMBERS', res.data.data))
     }

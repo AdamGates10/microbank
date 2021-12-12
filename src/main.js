@@ -6,7 +6,7 @@ import vuetify from "./vuetify/vuetify";
 import axios from "axios";
 
 import VueCompositionApi from "@vue/composition-api";
-// axios.defaults.baseURL = "http://localhost:8000/api";
+axios.defaults.baseURL = "http://localhost:8000/api";
 
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 Vue.component("ValidationProvider", ValidationProvider);

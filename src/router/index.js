@@ -155,13 +155,11 @@ const router = new VueRouter({
 });
 
 const isLoggedIn = () => {
-  return localStorage.getItem("auth");
+  return localStorage.getItem("token");
 };
-
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.authOnly)) {
-
     if (!store.getters.authenticated && (!isLoggedIn() || isLoggedIn())) {
       next({
         path: "/login",
@@ -171,12 +169,13 @@ router.beforeEach((to, from, next) => {
       });
     } else { next() }
   } else if (to.matched.some((record) => record.meta.guestOnly)) {
-
     if (
       isLoggedIn() &&
       store.getters.authenticated
     ) {
+      //if (to.matched.some((record) => record.name === "Login")) {
       next("/home");
+      //	}
     } else {
       next();
     }
